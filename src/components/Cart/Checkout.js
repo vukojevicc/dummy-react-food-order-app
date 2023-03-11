@@ -34,8 +34,8 @@ const Checkout = (props) => {
       name: enteredNameIsValid,
       street: enteredStreetIsValid,
       city: enteredCityIsValid,
-      postalCode: enteredPostalCodeIsValid
-    })
+      postalCode: enteredPostalCodeIsValid,
+    });
 
     const formIsValid =
       enteredNameIsValid &&
@@ -48,24 +48,36 @@ const Checkout = (props) => {
     }
   };
 
+  const controlClass = classes.control;
+  const invalidClass = classes.invalid;
+
+  const {
+    name: nameIsValid,
+    street: streetIsValid,
+    city: cityIsValid,
+    postalCode: postalCodeIsValid,
+  } = formInputsValidity;
+
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
-      <div className={classes.control}>
+      <div className={`${controlClass} ${!nameIsValid && invalidClass}`}>
         <label htmlFor="name">Your Name</label>
         <input type="text" id="name" ref={nameInputRef} />
         {!formInputsValidity.name && <p>Please enter a valid name.</p>}
       </div>
-      <div className={classes.control}>
+      <div className={`${controlClass} ${!streetIsValid && invalidClass}`}>
         <label htmlFor="street">Street</label>
         <input type="text" id="street" ref={streetInputRef} />
         {!formInputsValidity.street && <p>Please enter a valid street.</p>}
       </div>
-      <div className={classes.control}>
+      <div className={`${controlClass} ${!postalCodeIsValid && invalidClass}`}>
         <label htmlFor="postal">Postal Code</label>
         <input type="text" id="postal" ref={postalCodeInputRef} />
-        {!formInputsValidity.postalCode && <p>Please enter a valid postal code.</p>}
+        {!formInputsValidity.postalCode && (
+          <p>Please enter a valid postal code.</p>
+        )}
       </div>
-      <div className={classes.control}>
+      <div className={`${controlClass} ${!cityIsValid && invalidClass}`}>
         <label htmlFor="city">City</label>
         <input type="text" id="city" ref={cityInputRef} />
         {!formInputsValidity.city && <p>Please enter a valid city.</p>}
